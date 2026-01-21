@@ -3,10 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+        */
+/*   By: tkenji-u <tkenji-u@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:56:50 by thiagouemur       #+#    #+#             */
-/*   Updated: 2026/01/19 14:56:51 by thiagouemur      ###   ########.fr       */
+/*   Updated: 2026/01/20 16:40:36 by tkenji-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int	main(int argc, char **argv)
+{
+	if(argc == 6)
+	{
+
+	}
+	else
+		return (0);
+}
