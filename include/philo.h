@@ -6,7 +6,7 @@
 /*   By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:41:19 by thiagouemur       #+#    #+#             */
-/*   Updated: 2026/01/23 17:06:21 by thiagouemur      ###   ########.fr       */
+/*   Updated: 2026/01/23 17:10:41 by thiagouemur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ typedef struct s_data
 {
 	int				num_philos;
 	int				time_to_die;
-	int 			time_to_eat;
-	int 			time_to_sleep;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				meals_limit;
 	long			start_time;
 	pthread_mutex_t	*forks;
@@ -39,7 +39,7 @@ typedef struct s_philo
 }				t_philo;
 
 int		main(int argc, char **argv);
-int 	init_data(t_data *data, int argc, char **argv);
+int		init_data(t_data *data, int argc, char **argv);
 int		init_mutexes(t_data *data);
 int		init_philops(t_data *data);
 //utils

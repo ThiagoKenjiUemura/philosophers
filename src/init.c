@@ -6,7 +6,7 @@
 /*   By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:27:48 by thiagouemur       #+#    #+#             */
-/*   Updated: 2026/01/23 16:51:37 by thiagouemur      ###   ########.fr       */
+/*   Updated: 2026/01/23 17:11:51 by thiagouemur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	init_philos(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->philos = malloc(sizeof(t_philo) * data->num_philos);
@@ -39,11 +39,11 @@ int	init_mutexes(t_data *data)
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
 	if (!data->forks)
 		return (1);
-	if(pthread_mutex_init(&data->write_lock, NULL) != 0)
+	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
 		return (1);
 	while (i < data->num_philos)
 	{
-		if(pthread_mutex_init(&data->forks[i], NULL) != 0);
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
 			return (1);
 		i++;
 	}
@@ -64,5 +64,5 @@ int	init_data(t_data *data, int argc, char **argv)
 		return (1);
 	if (init_mutexes(data) != 0)
 		return (1);
-	return (0); 
+	return (0);
 }
