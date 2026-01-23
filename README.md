@@ -3,5 +3,6 @@ Philosophers is a 42 School project focused on concurrency and synchronization i
 
 Soluction:
 - Makefile and structure creation;
-- Creation of the function that initialize the datas received
-- Creation of the function that initialize the mutexes and philosofers
+- Creation of the function that initialize the datas receive;
+- Creation of the function that initialize the mutexes and philosofers;
+- started the actions(eat, sleep, think), the routine(thread)  and the monitor(death verify);
