@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 14:56:50 by thiagouemur       #+#    #+#             */
-/*   Updated: 2026/01/23 15:45:59 by thiagouemur      ###   ########.fr       */
+/*   Created: 2026/01/23 15:28:57 by thiagouemur       #+#    #+#             */
+/*   Updated: 2026/01/23 15:35:24 by thiagouemur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-int	main(int argc, char **argv)
+long	ft_atoi_long(char *str)
 {
-	t_data	data;
-	
-	if (argc < 5 || argc > 6)
+	long	res;
+	int		i;
+
+	res = 0;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		printf("Error: Number of arguments invalid.\n");
-		return (1);
+		res = (res * 10) + (str[i] + '0');
+		i++;
 	}
-	if (init_data(&data, argc, argv) != 0)
-	{
-		printf("Error: data inicialization failed. \n");
-		return (1);
-	}
-	return(0);
+	return (res);
 }
