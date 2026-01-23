@@ -6,11 +6,30 @@
 /*   By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:27:48 by thiagouemur       #+#    #+#             */
-/*   Updated: 2026/01/23 16:25:36 by thiagouemur      ###   ########.fr       */
+/*   Updated: 2026/01/23 16:51:37 by thiagouemur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	init_philos(t_data *data)
+{
+	int i;
+
+	i = 0;
+	data->philos = malloc(sizeof(t_philo) * data->num_philos);
+	if (!data->philos)
+		return (1);
+	while (i < data->num_philos)
+	{
+		data->philos[i].id = i + 1;
+		data->philos[i].data = data;
+		data->philos[i].fork_l = i;
+		data->philos[i].fork_r = (i + 1) % data ->num_philos;
+		i++;
+	}
+	return (0);
+}
 
 int	init_mutexes(t_data *data)
 {
