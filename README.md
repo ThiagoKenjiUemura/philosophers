@@ -4,3 +4,4 @@ Philosophers is a 42 School project focused on concurrency and synchronization i
 Soluction:
 - Makefile and structure creation;
 - Creation of the function that initialize the datas received
+- Creation of the function that initialize the mutexes

@@ -6,9 +6,11 @@
 /*   By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:28:57 by thiagouemur       #+#    #+#             */
-/*   Updated: 2026/01/23 15:35:24 by thiagouemur      ###   ########.fr       */
+/*   Updated: 2026/01/23 15:49:39 by thiagouemur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 long	ft_atoi_long(char *str)
 {

@@ -6,7 +6,7 @@
 #    By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/19 14:43:11 by thiagouemur       #+#    #+#              #
-#    Updated: 2026/01/23 14:56:17 by thiagouemur      ###   ########.fr        #
+#    Updated: 2026/01/23 16:28:29 by thiagouemur      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ CFLAGS = -Wall -Wextra -Werror -Iinclude
 SRC_DIR = src
 OBJ-DIR = obj
 
-SRC = $(SRC_DIR)/main.c
+SRC = $(SRC_DIR)/main.c \
+		$(SRC_DIR)/utils.c\
+		$(SRC_DIR)/init.c\
 OBJ = $(SRC:$(SRC_DIR)/%.C=$(OBJ_DIR/%.o))
 
 all: $(NAME)
