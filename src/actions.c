@@ -6,7 +6,7 @@
 /*   By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 18:11:09 by thiagouemur       #+#    #+#             */
-/*   Updated: 2026/01/27 17:57:33 by thiagouemur      ###   ########.fr       */
+/*   Updated: 2026/01/27 18:41:22 by thiagouemur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,18 @@ static void	philo_eat(t_philo *philo)
 	print_action(philo, "has taken a fork");
 	if (data->num_philos == 1)
 	{
-		usleep(data->time_to_die * 1000);
+		precise_usleep(data->time_to_eat, data);
 		pthread_mutex_unlock(&data->forks[philo->fork_l]);
 		return ;
 	}
 	pthread_mutex_lock(&data->forks[philo->fork_r]);
 	print_action(philo, "has taken a fork");
+	pthread_mutex_lock(&philo->meal_lock);
+	philo->last_meal = get_time_ms();
+	philo->meals_eaten++;
+	pthread_mutex_unlock(&philo->meal_lock);
 	print_action(philo, "is eating");
-	usleep(data->time_to_eat * 1000);
+	precise_usleep(data->time_to_eat, data);
 	pthread_mutex_unlock(&data->forks[philo->fork_l]);
 	pthread_mutex_unlock(&data->forks[philo->fork_r]);
 }
@@ -62,17 +66,20 @@ static void	philo_eat(t_philo *philo)
 void	*routine(void *arg)
 {
 	t_philo		*philo;
+	t_data		*data;
 
 	philo = (t_philo *)arg;
+	data = philo->data;
 	if (philo->id % 2 == 0)
 		usleep(1000);
 	while (!simulation_finished(philo->data))
 	{
 		philo_eat(philo);
 		print_action(philo, "is sleeping");
-		usleep(philo->data->time_to_sleep * 1000);
+		precise_usleep(data->time_to_sleep, data);
 		print_action(philo, "is thinking");
-		usleep(500);
+		if (philo->data->num_philos % 2 != 0)
+			precise_usleep(data->time_to_eat, data);
 	}
 	return (NULL);
 }

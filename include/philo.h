@@ -6,7 +6,7 @@
 /*   By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:41:19 by thiagouemur       #+#    #+#             */
-/*   Updated: 2026/01/27 17:54:25 by thiagouemur      ###   ########.fr       */
+/*   Updated: 2026/01/27 18:33:49 by thiagouemur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	print_action(t_philo *philo, char *msg);
 void	*routine(void *arg);
 void	monitor_check(t_data *data);
 void	set_stop_flag(t_data *data);
+void	precise_usleep(long msec, t_data *data);
+int		simulation_finished(t_data *data);
 //utils
 long	ft_atoi_long(char *str);
 void	cleanup(t_data *data);
