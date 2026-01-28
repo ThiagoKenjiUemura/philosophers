@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thiagouemura <thiagouemura@student.42.f    +#+  +:+       +#+        */
+/*   By: tkenji-u <tkenji-u@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 18:11:09 by thiagouemur       #+#    #+#             */
-/*   Updated: 2026/01/27 18:41:22 by thiagouemur      ###   ########.fr       */
+/*   Updated: 2026/01/28 14:16:58 by tkenji-u         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,41 @@ int	simulation_finished(t_data *data)
 	return (res);
 }
 
-static void	philo_eat(t_philo *philo)
+static void	update_meal_status(t_philo *philo)
 {
-	t_data	*data;
-
-	data = philo->data;
-	pthread_mutex_lock(&data->forks[philo->fork_l]);
-	print_action(philo, "has taken a fork");
-	if (data->num_philos == 1)
-	{
-		precise_usleep(data->time_to_eat, data);
-		pthread_mutex_unlock(&data->forks[philo->fork_l]);
-		return ;
-	}
-	pthread_mutex_lock(&data->forks[philo->fork_r]);
-	print_action(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->last_meal = get_time_ms();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->meal_lock);
+}
+
+static void	philo_eat(t_philo *philo)
+{
+	int	f1;
+	int	f2;
+
+	f1 = philo->fork_l;
+	f2 = philo->fork_r;
+	if (f1 > f2)
+	{
+		f1 = philo->fork_r;
+		f2 = philo->fork_l;
+	}
+	pthread_mutex_lock(&philo->data->forks[f1]);
+	print_action(philo, "has taken a fork");
+	if (philo->data->num_philos == 1)
+	{
+		precise_usleep(philo->data->time_to_die, philo->data);
+		pthread_mutex_unlock(&philo->data->forks[f1]);
+		return ;
+	}
+	pthread_mutex_lock(&philo->data->forks[f2]);
+	print_action(philo, "has taken a fork");
+	update_meal_status(philo);
 	print_action(philo, "is eating");
-	precise_usleep(data->time_to_eat, data);
-	pthread_mutex_unlock(&data->forks[philo->fork_l]);
-	pthread_mutex_unlock(&data->forks[philo->fork_r]);
+	precise_usleep(philo->data->time_to_eat, philo->data);
+	pthread_mutex_unlock(&philo->data->forks[f2]);
+	pthread_mutex_unlock(&philo->data->forks[f1]);
 }
 
 void	*routine(void *arg)
